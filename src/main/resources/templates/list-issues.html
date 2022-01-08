@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Issues</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <div th:switch="${issues}">
+            <h2 th:case="null">No issues yet!</h2>
+            <div th:case="*">
+                <h2>Issues</h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Severity</th>
+                        <th>Assignee</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="issue : ${issues}">
+                        <td th:text="${issue.description}"></td>
+                        <td th:text="${issue.severity}"></td>
+                        <td th:text="${issue.assignee}"></td>
+                        <td><a th:href="@{/edit/{id}(id=${issue.id})}">Edit</a></td>
+                        <td><a th:href="@{/delete/{id}(id=${issue.id})}">Delete</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p><a href="/signup">Add a new issue</a></p>
+        </div>
+    </body>
+</html>
